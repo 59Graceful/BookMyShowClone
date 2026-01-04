@@ -8,7 +8,7 @@ const theatreRoute = require('./routes/theatreRoute');
 const upcomingRoute = require('./routes/upcomingRoute');
 const bookingRoute = require('./routes/bookingRoute');
 const dbConfig = require("./config/dbconfig");
-app.use(express.static('public'))
+app.use(express.static('./public'))
 app.use(cors())
 app.use(express.json())
 app.use('/api/users',userRouter);
