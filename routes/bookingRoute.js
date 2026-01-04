@@ -36,7 +36,7 @@ const stripe = require("stripe")(process.env.StripeSecretKey);
 //     });
 //   }
 // });
-
+const CLIENT_URL = process.env.CLIENT_URL;
 router.post("/make-payment", validatingAuthToken, async (req, res) => {
   try {
     const { amount } = req.body;
@@ -63,9 +63,9 @@ router.post("/make-payment", validatingAuthToken, async (req, res) => {
           quantity: 1,
         },
       ],
-      success_url:
-        "http://localhost:3000/payment-success?session_id={CHECKOUT_SESSION_ID}",
-      cancel_url: "http://localhost:3000/payment-failed",
+      success_url: `${CLIENT_URL}/payment-success?session_id={CHECKOUT_SESSION_ID}`,
+      cancel_url: `${CLIENT_URL}/payment-failed`,
+
     });
 
     res.send({

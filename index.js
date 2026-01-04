@@ -9,13 +9,20 @@ const upcomingRoute = require('./routes/upcomingRoute');
 const bookingRoute = require('./routes/bookingRoute');
 const dbConfig = require("./config/dbconfig");
 app.use(express.static('./public'))
-app.use(cors())
+app.use(cors({
+    origin: [
+        "https://book-my-show-830p.onrender.com"
+    ],
+    methods: ["GET", "POST", "PUT", "DELETE"],
+    allowedHeaders: ["Content-Type", "Authorization"],
+    credentials: true
+}))
 app.use(express.json())
-app.use('/api/users',userRouter);
+app.use('/api/users', userRouter);
 app.use('/api/movies', movieRoute);
-app.use('/api/theatres',theatreRoute);
+app.use('/api/theatres', theatreRoute);
 app.use('/api/upcoming', upcomingRoute);
 app.use('/api/bookings', bookingRoute);
-app.listen(process.env.PORT,()=>{
+app.listen(process.env.PORT, () => {
     console.log(`server is listening to port no ${process.env.PORT}`)
 })
