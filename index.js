@@ -8,7 +8,7 @@ const theatreRoute = require('./routes/theatreRoute');
 const upcomingRoute = require('./routes/upcomingRoute');
 const bookingRoute = require('./routes/bookingRoute');
 const dbConfig = require("./config/dbconfig");
-app.use(express.static('./public'))
+//app.use(express.static('./public'))
 const path = require("path");
 
 app.use(cors({
@@ -25,6 +25,9 @@ app.use('/api/movies', movieRoute);
 app.use('/api/theatres', theatreRoute);
 app.use('/api/upcoming', upcomingRoute);
 app.use('/api/bookings', bookingRoute);
+
+app.use(express.static(path.join(__dirname, "public")));
+
 
 // React SPA catch-all
 app.get("*", (req, res) => {
