@@ -9,6 +9,8 @@ const upcomingRoute = require('./routes/upcomingRoute');
 const bookingRoute = require('./routes/bookingRoute');
 const dbConfig = require("./config/dbconfig");
 app.use(express.static('./public'))
+const path = require("path");
+
 app.use(cors({
     origin: [
         "https://book-my-show-830p.onrender.com"
@@ -23,6 +25,12 @@ app.use('/api/movies', movieRoute);
 app.use('/api/theatres', theatreRoute);
 app.use('/api/upcoming', upcomingRoute);
 app.use('/api/bookings', bookingRoute);
+
+// React SPA catch-all
+app.get("*", (req, res) => {
+  res.sendFile(path.join(__dirname, "public", "index.html"));
+});
+
 app.listen(process.env.PORT, () => {
     console.log(`server is listening to port no ${process.env.PORT}`)
 })
