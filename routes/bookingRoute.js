@@ -3,7 +3,8 @@ const Booking = require("../models/bookingModel");
 const Show = require("../models/showModel");
 const router = require("express").Router();
 const stripe = require("stripe")(process.env.StripeSecretKey);
-
+const CLIENT_URL = process.env.CLIENT_URL;
+console.log("CLIENT_URL >>>", JSON.stringify(CLIENT_URL));
 // router.post("/make-payment", validatingAuthToken, async (req, res) => {
 //   try {
 //     // const { token, amount } = req.body;
@@ -36,7 +37,7 @@ const stripe = require("stripe")(process.env.StripeSecretKey);
 //     });
 //   }
 // });
-const CLIENT_URL = process.env.CLIENT_URL;
+
 router.post("/make-payment", validatingAuthToken, async (req, res) => {
   try {
     const { amount } = req.body;
